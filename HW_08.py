@@ -2,7 +2,7 @@ from datetime import datetime
 from datetime import timedelta
 
 users = [
-        {"name":"Bill", "birthday":datetime(1995,6,30)},
+        {"name":"Bill", "birthday":datetime(1995,6,27)},
         {"name":"Stiv", "birthday":datetime(1990,6,26)},
         {"name":"Jill", "birthday":datetime(1990,6,28)},
         {"name":"John", "birthday":datetime(1998,6,28)},
@@ -52,14 +52,8 @@ def get_birthdays_per_week(users:dict)->dict:
                     case "Saturday": dt = dt.date() + timedelta(days=2)
                     case  "Sunday": dt = dt.date() + timedelta(days=1)
                     
-                # якщо виходимо за межі 7 днів
-                if dt > end_date.date(): # відпрац. людей у яких Д.Н. у суб, неділю. але вони виходять за межі +7 днів
-                    try:
-                        dct["next_Monday"].append(person["name"])
-                    except KeyError:
-                        dct["next_Monday"] = []
-                        dct["next_Monday"].append(person["name"])
-                else:        
+                # якщо НЕ виходимо за межі 7 днів
+                if not dt >= end_date.date(): # відпрац. людей у яких Д.Н. у суб, неділю. але вони виходять за межі +7 днів
                     dct["Monday"].append(person["name"]) # вітаємо у Понеділок
             else:    
                 dct[dt.strftime("%A")].append(person["name"])
