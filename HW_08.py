@@ -73,7 +73,6 @@ def get_birthdays_per_week(users:dict)->dict:
 # які святкують Д.Н. впродовж неділі
 # =======================================
 def print_birthday_man(birthdays:dict):
-    # Находим индекс названия дня недели в списке
     for week_day, value in birthdays.items():
         if len(value) > 0:
             s = ", ".join(value)
